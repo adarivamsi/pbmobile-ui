@@ -1,5 +1,5 @@
 #stage 1
-FROM docker pull node:16.13.2-alpine as node
+FROM node:16.13.2-alpine as node
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json /app
