@@ -9,5 +9,5 @@ RUN npm run build --prod
 
 #stage 2
 FROM nginx:latest
-COPY --from=node /app/dist/pnmobile-ui /usr/share/nginx/html
+COPY --from=node /app/dist/pbmobile-ui /usr/share/nginx/html
 EXPOSE 4200:80
