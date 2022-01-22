@@ -1,0 +1,7 @@
+version: "0.1"
+services:
+  angular-service:
+    container_name: pbmobile-ui
+    build: .
+    ports:
+      - "4200:80"
