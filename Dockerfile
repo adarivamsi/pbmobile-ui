@@ -8,6 +8,6 @@ COPY . /app
 RUN npm run build --prod
 
 #stage 2
-FROM nginx:alpine
+FROM nginx:latest
 COPY --from=node /app/dist/pnmobile-ui /usr/share/nginx/html
 EXPOSE 4200:80
