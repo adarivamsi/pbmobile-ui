@@ -64,7 +64,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # build docker image and push to docker hub
-    # only if the app build and test successfully
+    # only if the pb-mobile build and test successfully
     needs: [build]
 
     steps:
@@ -90,7 +90,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:latest
-        
+
       - name: Run the image in a container
         uses: addnab/docker-run-action@v3
         with:
