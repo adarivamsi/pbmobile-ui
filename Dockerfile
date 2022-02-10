@@ -6,7 +6,7 @@ WORKDIR /pb-mobile
 COPY package.json /pb-mobile
 RUN npm install
 COPY . /pb-mobile
-RUN npm run build --prod
+RUN npm run build
 
 #stage 2
 FROM nginx:latest
