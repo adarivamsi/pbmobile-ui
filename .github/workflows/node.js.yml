@@ -96,7 +96,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Create timestamp for docker image tag with branch name
+      - if: ${{ github.head_ref == 'main' }}
+        name: Create timestamp for docker image tag with branch name
         run: echo "TS=${{ github.head_ref }}-$(date +'%m-%d-%Y-%H-%M-%S')" >> $GITHUB_ENV
 
       - if: ${{ github.head_ref == 'main' }}
