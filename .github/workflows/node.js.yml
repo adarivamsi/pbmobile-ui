@@ -39,6 +39,13 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - name: package-version
+      uses: nyaa8/package-version@v1.0.3
+    - name: Print current node package version number
+      run: |
+        echo "NODE_PACKAGE_VERSION=$(echo $env.PACKAGE_VERSION)" >> $GITHUB_ENV
+        echo ${{ env.NODE_PACKAGE_VERSION }}
+
     - name: Install
       run: |
         npm install
@@ -71,14 +78,6 @@ jobs:
     needs: [build]
 
     steps:
-      - name: Read node from package.json
-        uses: culshaw/read-package-node-version-actions@v1
-        id: package-node-version
-
-      - name: Extract node current package version number
-        run: |
-          echo "Current Node Version is ${{ steps.package-node-version.outputs.version }}"
-
       - name: checkout repo
         uses: actions/checkout@v2
 
@@ -101,7 +100,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ steps.package-node-version.outputs.version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ env.NODE_PACKAGE_VERSION }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:latest
 
       - name: Run the image in a container
