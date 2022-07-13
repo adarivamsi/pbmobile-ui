@@ -45,7 +45,7 @@ jobs:
       id: package-node-version
     - name: Extract node current package version number
       run: |
-        VERSION_TAG=${{ steps.package-node-version.outputs.version }}
+        env.VERSION_TAG=${{ steps.package-node-version.outputs.version }}
         echo "VERSION_TAG=${{ steps.package-node-version.outputs.version }}" >> $GITHUB_ENV
         echo "${{ env.VERSION_TAG }}"
     - name: Install
