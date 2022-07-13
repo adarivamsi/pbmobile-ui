@@ -90,7 +90,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:${{ steps.tag_version.outputs.new_version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:${{ steps.package-version.outputs.version }}
             ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:latest
 
       - name: Run the image in a container
