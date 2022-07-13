@@ -43,7 +43,7 @@ jobs:
       run: |
         PACKAGE_TAG=${{ steps.package-node-version.outputs.version }}
         echo "PACKAGE_TAG=${{ steps.package-node-version.outputs.version }}" >> $GITHUB_ENV
-        echo "${{env}}"
+        echo "${{env.PACKAGE_TAG}}"
     - name: Install
       run: |
         npm install
