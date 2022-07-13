@@ -12,6 +12,7 @@ on:
 
 env:
   DOCKERHUB_IMAGE: pbmobile-ui_angular-service
+  VERSION_TAG: latest
 
 jobs:
   build:
