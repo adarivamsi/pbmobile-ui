@@ -43,8 +43,7 @@ jobs:
       uses: nyaa8/package-version@v1.0.3
     - name: Print current node package version number
       run: |
-        echo "NODE_PACKAGE_VERSION=${{ env.PACKAGE_VERSION }}" >> $GITHUB_ENV
-        echo $NODE_PACKAGE_VERSION
+        echo "NODE PACKAGE VERSION is ${{ env.PACKAGE_VERSION }}"
 
     - name: Install
       run: |
@@ -99,9 +98,9 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ env.PACKAGE_VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:latest
+          run: |
+            echo "NODE PACKAGE VERSION is ${{ env.PACKAGE_VERSION }}"
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ env.PACKAGE_VERSION }}, ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:latest
 
       - name: Run the image in a container
         uses: addnab/docker-run-action@v3
