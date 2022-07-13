@@ -71,12 +71,13 @@ jobs:
     needs: [build]
 
     steps:
-      - name: package-version
-        uses: nyaa8/package-version@v1.0.3
-        
-      - name: Print current node package version number
+      - name: Read node from package.json
+        uses: culshaw/read-package-node-version-actions@v1
+        id: package-node-version
+
+      - name: Extract node current package version number
         run: |
-          echo "Current Package Version: ${{ env.PACKAGE_VERSION }}"
+          echo "Current Node Version is ${{ steps.package-node-version.outputs.version }}"
 
       - name: checkout repo
         uses: actions/checkout@v2
@@ -100,7 +101,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ env.PACKAGE_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:${{ steps.package-node-version.outputs.version }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_IMAGE }}:latest
 
       - name: Run the image in a container
