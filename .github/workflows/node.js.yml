@@ -43,7 +43,7 @@ jobs:
       uses: nyaa8/package-version@v1.0.3
     - name: Print current node package version number
       run: |
-        echo "Current Package Version: ${{ env.PACKAGE_VERSION }}}"
+        echo "Current Package Version: ${{ env.PACKAGE_VERSION }}"
     - name: Install
       run: |
         npm install
