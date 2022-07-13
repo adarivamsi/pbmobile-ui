@@ -36,6 +36,10 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - name: Read node from package.json
+      uses: culshaw/read-package-node-version-actions@v1
+      id: package-node-version
+      run: echo "Current Package Version is ${{ steps.package-node-version.outputs.version }}"
     - name: Install
       run: |
         npm install
@@ -90,7 +94,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:${{ steps.package-version.outputs.version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:${{ steps.package-node-version.outputs.version }}
             ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:latest
 
       - name: Run the image in a container
