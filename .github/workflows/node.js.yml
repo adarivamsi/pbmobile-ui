@@ -39,8 +39,10 @@ jobs:
     - name: Read node from package.json
       uses: culshaw/read-package-node-version-actions@v1
       id: package-node-version
-    - name: Show node current package version number
-      run: echo "PACKAGE_TAG=${{ steps.package-node-version.outputs.version }}" >> $GITHUB_ENV
+    - name: Extract node current package version number
+      run: |
+        PACKAGE_TAG=${{ steps.package-node-version.outputs.version }}
+        echo "PACKAGE_TAG=${{ steps.package-node-version.outputs.version }}" >> $GITHUB_ENV
     - name: Install
       run: |
         npm install
@@ -95,7 +97,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:${{ env.PACKAGE_TAG }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:$PACKAGE_TAG
             ${{ secrets.DOCKERHUB_USERNAME }}/pbmobile-ui_angular-service:latest
 
       - name: Run the image in a container
