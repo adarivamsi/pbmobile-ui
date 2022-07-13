@@ -39,6 +39,7 @@ jobs:
     - name: Read node from package.json
       uses: culshaw/read-package-node-version-actions@v1
       id: package-node-version
+    - name: Show node current package version number
       run: echo "Current Package Version is ${{ steps.package-node-version.outputs.version }}"
     - name: Install
       run: |
