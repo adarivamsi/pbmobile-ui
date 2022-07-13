@@ -10,5 +10,5 @@ RUN npm run build
 
 #stage 2
 FROM nginx:latest
-COPY --from=node /pbmobile-ui/dist/pbmobile-ui /usr/share/nginx/html
+COPY --from=node /pb-mobile/dist/pbmobile-ui /usr/share/nginx/html
 EXPOSE 4200:80
