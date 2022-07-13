@@ -3,9 +3,9 @@ FROM node:16.13.2-alpine as node
 LABEL author="Vamsi Charan Adari"
 RUN mkdir -p /pb-mobile
 WORKDIR /pb-mobile
-COPY package.json /pb-mobile
+COPY package.json ./
 RUN npm install
-COPY . /pb-mobile
+COPY . .
 RUN npm run build
 
 #stage 2
